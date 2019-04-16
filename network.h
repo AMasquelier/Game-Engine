@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #pragma comment(lib, "ws2_32.lib")
 
+//  /!\ Work in progress /!\  \\
+
 class Network
 {
 	public:
@@ -13,8 +15,10 @@ class Network
 		void Disconnect();
 		int Send(const char *buffer, int len);
 		int Recv(char *buffer, int len);
+		int send_file(const char *filename);
+		int recv_file(const char *filename);
 
-		bool isConnected();
+		bool is_connected();
 
 	private:
 		WSADATA WSAData;

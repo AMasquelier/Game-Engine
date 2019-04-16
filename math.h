@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdarg.h>
+#include <math.h>
 
 static float PI = 3.14159265;
 

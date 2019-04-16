@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "math.h"
+#include "Box2D/Box2D.h"
 
 static Vector Vec2 = Vector(2);
 
@@ -11,6 +12,7 @@ class Point2D
 {
 	public:
 		Point2D();
+		Point2D(const b2Vec2 &vec);
 		Point2D(const Vector & v);
 		Point2D(double x, double y);
 		void Set(double x, double y);

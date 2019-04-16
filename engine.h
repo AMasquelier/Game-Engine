@@ -16,6 +16,8 @@ class Game_Engine
 		Window _window;
 		Inputs _input;
 		Physics_Engine _physics;
+		void *_update_func;
+		void *_display_func;
 
 
 		double main_framerate = 90;
