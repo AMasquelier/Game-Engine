@@ -62,6 +62,11 @@ void Rigidbody::set_dynamic()
 	_body->SetType(b2_dynamicBody);
 }
 
+void Rigidbody::apply_force(double speed)
+{
+	_body->ApplyLinearImpulseToCenter({ (float)speed, 0 }, true);
+}
+
 
 
 // Collider
@@ -88,7 +93,6 @@ void BoxCollider::load(b2World *world, double x, double y, double w, double h)
 	b2BodyDef bd;
 	bd.position.Set(x, y);
 	b2Body *body = world->CreateBody(&bd);
-
 	b2PolygonShape shape;
 	shape.SetAsBox(w / 2, h / 2);
 
@@ -149,7 +153,7 @@ void Physics_Engine::run()
 {
 	Physics_Engine::current_engine = this;
 	
-	_world->Step(_dt, 5, 500);
+	_world->Step(_dt, 50, 500);
 }
 
 Component Physics_Engine::add_rigidbody(Rigidbody rb)
@@ -221,6 +225,7 @@ float Physics_Engine::get_dt()
 {
 	return _dt;
 }
+
 
 unsigned int Physics_Engine::get_rb_id()
 {

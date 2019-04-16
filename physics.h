@@ -16,6 +16,7 @@ class Rigidbody
 		void update();
 		void set_box_body(b2World *world, double x, double y, double w, double h);
 		void set_dynamic();
+		void apply_force(double speed);
 
 		unsigned int get_ID();
 		void set_ID(unsigned int ID);
