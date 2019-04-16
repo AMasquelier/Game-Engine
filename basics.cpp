@@ -1,5 +1,6 @@
 #include "basics.h"
 
+
 Vector Vector2(double x, double y)
 {
 	Vector v = Vec2;
@@ -7,9 +8,18 @@ Vector Vector2(double x, double y)
 	return v;
 }
 
+
 Point2D::Point2D()
 {
 	_p.reserve(2);
+}
+
+Point2D::Point2D(const b2Vec2 & vec)
+{
+	if (vec.IsValid())
+	{
+		_p = Vector2(vec.x, vec.y);
+	}
 }
 
 Point2D::Point2D(const Vector & v)

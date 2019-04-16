@@ -1,6 +1,8 @@
 ﻿#include "engine.h"
 #include "raycasting.h"
 #include "tests.h"
+#include "Box2D/Box2D.h"
+
 Game_Engine::Game_Engine()
 {
 }
@@ -24,29 +26,23 @@ void Game_Engine::MainLoop()
 {
 	Clock framerate_timer; framerate_timer.start();
 
-	BoxCollider c;
-	c.setAABB(Vector2(250, 600), Vector2(1200, 700));
-	_physics.add_collider(c);
+	_physics.add_box_rigidbody(10, 2, 5, 5);
+	_physics.add_box_rigidbody(17, -2, 5, 5);
+	_physics.add_box_rigidbody(23, 2, 5, 5);
+	_physics.add_box_rigidbody(5, -2, 5, 5);
+	_physics.add_box_rigidbody(5, -10, 5, 5);
+	_physics.add_box_rigidbody(11, -10, 5, 5);
+	_physics.add_box_rigidbody(27, -10, 5, 5);
+	_physics.add_box_rigidbody(23, -20, 5, 5);
+	_physics.add_box_rigidbody(17, -16, 5, 5);
+	_physics.add_collider(0, 30, 80, 5);
 
-	c.setAABB(Vector2(900, 50), Vector2(1000, 700));
-	c.set_restitution(0.8);
-	_physics.add_collider(c);
-
-	c.setAABB(Vector2(200, 50), Vector2(300, 700));
-	c.set_restitution(0.8);
-	_physics.add_collider(c);
-
-	Inspector *ins;
-	Rigidbody *rb2 = _physics.get_rigidbody(0);
-
-	Character player(Vector2(500, 500));
-
-
-	bool debug_mode = false;
+	bool debug_mode = true;
+	
 
 	while (!close_game)
 	{
-		if (framerate_timer.duration() > 1000000.0 / main_framerate)
+		if (framerate_timer.duration() >= 1000000.0 / main_framerate)
 		{
 			double act_fps = ceilf(1000000.0 / framerate_timer.duration());
 			framerate_timer.start();
@@ -56,20 +52,16 @@ void Game_Engine::MainLoop()
 			if (_input.CloseGame) close_game = true;
 
 			if (_input.pushedInput(_input.F4))		debug_mode = !debug_mode;
-
-			if (_input.GetInput(_input.Space))		player.jump(0.8);
-			if (_input.GetInput(_input.Q))		player.go_left(0.8);
-			if (_input.GetInput(_input.D))		player.go_right(0.8);
-
+			if (_input.GetInput(_input.Space)) _physics.set_dt(1 / 600.0);
+			else _physics.set_dt(1 / 60.0);
 
 			// Update game objects
 			_physics.run();
-			player.update();
 
 			// Rendering
 			_window.clear();
 
-			player.display();
+			//player.display();
 
 			if (debug_mode)
 			{

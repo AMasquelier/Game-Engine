@@ -54,8 +54,10 @@ bool Window::create(const char *name, int w, int h, int x, int y)
 
 	_default_cam.SetFormat(w, h);
 	_default_cam.SetPos(0, 0);
+	_default_cam.SetZoom(10);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//glClearColor(1.0f, 1.0f, 1.0f, 0.5f);
 	glEnable(GL_DEPTH);
 	glClearDepth(1.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -91,7 +93,7 @@ void Window::update()
 void Window::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	_default_cam.GUI();
+	_default_cam.Perspective();
 }
 
 void Window::set_clear_color(Color color)
@@ -497,8 +499,8 @@ void Draw::Arrow(Point2D p1, Point2D p2, Color color)
 
 	glBegin(GL_TRIANGLES);
 	glVertex3f(p2.X(), p2.Y(), 0);
-	glVertex3f(p2.X() - cos(a + 0.4) * 8, p2.Y() + sin(a + 0.4) * 8, 0);
-	glVertex3f(p2.X() - cos(a - 0.4) * 8, p2.Y() + sin(a - 0.4) * 8, 0);
+	glVertex3f(p2.X() - cos(a + 0.4) * 1, p2.Y() + sin(a + 0.4) * 1, 0);
+	glVertex3f(p2.X() - cos(a - 0.4) * 1, p2.Y() + sin(a - 0.4) * 1, 0);
 	glEnd();
 }
 
