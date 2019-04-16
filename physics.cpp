@@ -3,11 +3,6 @@
 // Rigidbody
 Rigidbody::Rigidbody()
 {
-	_force.reserve(2);
-	_acceleration.reserve(2);
-	_velocity.reserve(2);
-	_position.reserve(2);
-
 }
 
 unsigned int Rigidbody::get_ID()
